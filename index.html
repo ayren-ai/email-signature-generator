@@ -137,25 +137,11 @@
         }
         
         .social-media-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            display: flex;
+            flex-direction: column;
             gap: 10px;
         }
         
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 12px;
-            font-family: monospace;
-            min-height: 200px;
-            display: none;
-        }
-        
-        textarea.show {
-            display: block;
-        }
     </style>
 </head>
 <body>
@@ -171,12 +157,12 @@
                 
                 <div class="form-group">
                     <label for="name">Name *</label>
-                    <input type="text" id="name" value="Erik Mesikapp" placeholder="Full Name">
+                    <input type="text" id="name" value="John Doe" placeholder="Full Name">
                 </div>
                 
                 <div class="form-group">
                     <label for="title">Title *</label>
-                    <input type="text" id="title" value="Board Member & Partner" placeholder="Job Title">
+                    <input type="text" id="title" value="Software Engineer" placeholder="Job Title">
                 </div>
                 
                 <div class="form-group">
@@ -186,12 +172,12 @@
                 
                 <div class="form-group">
                     <label for="email">Email *</label>
-                    <input type="email" id="email" value="erik@aggregatemarkets.com" placeholder="your@email.com">
+                    <input type="email" id="email" value="info@aggregatemarkets.com" placeholder="your@email.com">
                 </div>
                 
                 <div class="form-group">
                     <label for="phone">Phone *</label>
-                    <input type="tel" id="phone" value="+1 (574) 914-1289" placeholder="+1 (XXX) XXX-XXXX">
+                    <input type="tel" id="phone" value="+1 (555) 123-4567" placeholder="+1 (XXX) XXX-XXXX">
                 </div>
                 
                 <div class="form-group">
@@ -223,7 +209,7 @@
                         </div>
                         <div>
                             <label for="linkedin" style="font-size: 12px;">LinkedIn</label>
-                            <input type="text" id="linkedin" value="https://www.linkedin.com/company/ayren/" placeholder="URL">
+                            <input type="text" id="linkedin" value="https://www.linkedin.com/company/aggregatemarkets" placeholder="URL">
                         </div>
                     </div>
                 </div>
@@ -236,32 +222,29 @@
         </div>
         
         <div class="actions">
-            <button class="btn-primary" onclick="copyHTML()">Copy HTML</button>
             <button class="btn-primary" onclick="copyForGmail()">Copy for Gmail</button>
-            <button class="btn-secondary" onclick="showHTML()">Show HTML Code</button>
             <button class="btn-secondary" onclick="resetForm()">Reset</button>
         </div>
         
         <div style="padding: 0 20px 20px;">
             <div class="copy-success" id="copySuccess">✓ HTML copied to clipboard!</div>
-            <textarea id="htmlOutput" readonly></textarea>
         </div>
     </div>
 
     <script>
         // Default values
         const defaultValues = {
-            name: 'Erik Mesikapp',
-            title: 'Board Member & Partner',
+            name: 'John Doe',
+            title: 'Software Engineer',
             company: 'Aggregate Markets',
-            email: 'erik@aggregatemarkets.com',
-            phone: '+1 (574) 914-1289',
+            email: 'info@aggregatemarkets.com',
+            phone: '+1 (000) 000-0000',
             website: 'aggregatemarkets.com',
             location: 'South Bend, Indiana, USA',
             mapsLocation: 'South Bend, Indiana, USA',
             facebook: 'https://www.facebook.com/AggregateMarketsUSA/',
             instagram: 'https://www.instagram.com/aggregatemarkets/',
-            linkedin: 'https://www.linkedin.com/company/ayren/'
+            linkedin: 'https://www.linkedin.com/company/aggregatemarkets'
         };
 
         // Generate HTML signature
@@ -440,22 +423,6 @@
                 .trim();
         }
 
-        // Copy HTML to clipboard
-        async function copyHTML() {
-            const html = generateHTML();
-            try {
-                await navigator.clipboard.writeText(html);
-                const successMsg = document.getElementById('copySuccess');
-                successMsg.textContent = '✓ HTML copied to clipboard!';
-                successMsg.classList.add('show');
-                setTimeout(() => {
-                    successMsg.classList.remove('show');
-                }, 3000);
-            } catch (err) {
-                alert('Failed to copy. Please select and copy manually.');
-            }
-        }
-
         // Copy Gmail-compatible HTML to clipboard (copies rendered HTML like manual selection)
         async function copyForGmail() {
             try {
@@ -511,13 +478,6 @@
                     alert('Failed to copy. Please manually select the preview and copy (Ctrl+C / Cmd+C).');
                 }
             }
-        }
-
-        // Show HTML code
-        function showHTML() {
-            const textarea = document.getElementById('htmlOutput');
-            textarea.value = generateHTML();
-            textarea.classList.toggle('show');
         }
 
         // Reset form
